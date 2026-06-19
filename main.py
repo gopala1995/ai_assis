@@ -6,11 +6,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+@tool
+def calculator_tool(a: float, b: float) -> str:
+    """A simple calculator tool that adds two numbers."""
+    return f" sum is{a + b}"
 
 def main():
     model = ChatOpenAI(model="gpt-4o-mini",temperature=0)
 
-    tools = []
+    tools = [calculator_tool]
     agent_executor = create_react_agent(model, tools)
 
     print("Welcome to the ReAct Agent! Type 'exit' to quit.")
